@@ -3,9 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
-from src._01_preprocessing import json_to_string
+from _01_preprocessing import json_to_string
 
-data = pd.read_csv('.data/tmdb_5000_movies.csv')
+data = pd.read_csv('./data/tmdb_5000_movies.csv')
 data.head()
 
 # create a new string representation of each movie
