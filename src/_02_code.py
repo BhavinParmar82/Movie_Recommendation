@@ -40,3 +40,4 @@ def recommend(title):
     recommended_idx = (-scores).argsort()[1:6]
     
     return data['title'].iloc[recommended_idx]
+print(recommend('Stuart Little'))

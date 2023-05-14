@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 
-data = pd.read_csv('C:/Users/bhavi/Projects_Part2/TMDB 5000 Movies/tmdb_5000_movies.csv')
+data = pd.read_csv('C:/Users/bhavi/Projects_Part2/TMDB 5000 Movies/data/tmdb_5000_movies.csv')
 data.head()
 
 # convert the relevant data for each movie into a single string
@@ -86,7 +86,7 @@ def recommend(title):
     
     return data['title'].iloc[recommended_idx]
 
-recommend('Bubble Boy')
+output = recommend('Bubble Boy').tolist()
     
     
     
