@@ -1,3 +1,11 @@
 h1{
     color: blue;
+    text-align: center;
 }
+
+body {
+    background-image: url('../images/wallpaper-poster.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
