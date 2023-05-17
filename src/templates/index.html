@@ -14,29 +14,16 @@
       <input type="text" id="name" name="name" placeholder="Enter your search query" value=""><br>
       <input type="submit" value="Submit">
     </form>
-    
-    <script>
-      // Retrieve the last search query from localStorage
-      var lastSearchQuery = localStorage.getItem('lastSearchQuery');
-    
-      // Populate the form field with the last search query, if available
-      if (lastSearchQuery) {
-        document.getElementById('name').value = lastSearchQuery;
-      }
-    
-      // Listen for form submit event
-      document.getElementById('searchForm').addEventListener('submit', function(event) {
-        // Store the current search query in localStorage
-        localStorage.setItem('lastSearchQuery', document.getElementById('name').value);
-      });
-    </script>
+ 
+    <body>
+      <div class="container">
+        {% for item in movie_list %}
+        <div class='box'> {{ item  }} </div>
+        {% endfor %}
+      </div>
+    </body>
 
 
-    <ul class='list'>
-      {% for item in movie_list %}
-        <li>{{ item }}</li>
-      {% endfor %}
-    </ul>
 
   </body>  
 </html>
