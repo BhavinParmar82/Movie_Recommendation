@@ -1,11 +1,23 @@
 h1{
     color: blue;
     text-align: center;
+    font-size: 60px;
 }
 
 body {
-    background-image: url('../images/wallpaper-poster.jpg');
-    background-size: cover;
-    background-position: center;
+    background-color: burlywood;
   }
   
+#searchForm {
+    text-align: center;
+}
+
+#name, #labelname{
+    font-size: 20px;
+}
+
+.list {
+    text-align: center;
+    font-size: 30px;
+    list-style-type: none;
+}

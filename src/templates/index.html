@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <body>
   <head>
     <title>Background Image Example</title>
 
@@ -9,16 +10,33 @@
     <link rel='stylesheet' href="{{ url_for('static', filename='css/style.css') }}">
   </head>    
 
-    <form method='POST' action='/'>
-      <label for="name">Please Type Movie Name:</label><br>
-      <input type="text" id="name" name="name" value=""><br>
+    <form id="searchForm" method='POST' action='/'>
+      <input type="text" id="name" name="name" placeholder="Enter your search query" value=""><br>
       <input type="submit" value="Submit">
     </form>
     
-    <ul>
+    <script>
+      // Retrieve the last search query from localStorage
+      var lastSearchQuery = localStorage.getItem('lastSearchQuery');
+    
+      // Populate the form field with the last search query, if available
+      if (lastSearchQuery) {
+        document.getElementById('name').value = lastSearchQuery;
+      }
+    
+      // Listen for form submit event
+      document.getElementById('searchForm').addEventListener('submit', function(event) {
+        // Store the current search query in localStorage
+        localStorage.setItem('lastSearchQuery', document.getElementById('name').value);
+      });
+    </script>
+
+
+    <ul class='list'>
       {% for item in movie_list %}
         <li>{{ item }}</li>
       {% endfor %}
     </ul>
 
+  </body>  
 </html>

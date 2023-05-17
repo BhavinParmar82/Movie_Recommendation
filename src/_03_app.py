@@ -7,11 +7,13 @@ app = Flask(__name__)
 @app.route('/', methods = ['POST', 'GET'])
 def submit():
     movie_list = []
+    last_search_query = request.args.get('query', 'default_value')
+
     if request.method == 'POST':
         name = request.form['name']
         movie_list = recommend(name)
         movie_list = movie_list.tolist()
-    return render_template('index.html', movie_list = movie_list)
+    return render_template('index.html', movie_list = movie_list, last_search_query=last_search_query)
                  
 if __name__ == '__main__':
     app.run(debug=True)
