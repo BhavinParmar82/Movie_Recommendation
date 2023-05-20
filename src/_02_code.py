@@ -20,6 +20,11 @@ X = tfidf.fit_transform(data['string'])
 # Generate a mapping from movie title to index
 movie2idx = pd.Series(data.index, index=data['title'])
 
+# Generating unique list of movies
+def unique_movie_list():
+    movie_list = sorted(data['title'].unique().tolist())
+    return movie_list
+
 # create a function that generates recommendations
 def recommend(title):
     # get the row in the dataframe for this movie
@@ -37,6 +42,6 @@ def recommend(title):
     plt.plot(scores)
     plt.plot(scores[(-scores).argsort()])
     
-    recommended_idx = (-scores).argsort()[1:6]
+    recommended_idx = (-scores).argsort()[1:4]
     
-    return data['title'].iloc[recommended_idx]
+    return data['title'].iloc[recommended_idx].tolist()

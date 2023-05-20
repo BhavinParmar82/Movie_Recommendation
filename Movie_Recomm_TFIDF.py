@@ -86,7 +86,8 @@ def recommend(title):
     
     return data['title'].iloc[recommended_idx]
 
-output = recommend('Bubble Boy').tolist()
+output = recommend('Stuart Little').tolist()
+
     
     
     

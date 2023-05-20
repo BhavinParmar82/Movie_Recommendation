@@ -12,21 +12,37 @@ body {
     text-align: center;
 }
 
-#name, #labelname{
+select {
+    height: 40px;
+    width: 200px;
+  }
+
+#name{
     font-size: 20px;
 }
-
+#mname{
+    font-size: 20px;
+    text-align: center;
+    color:blue;
+}
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 500px;
   }
   
   .box {
-    width: 200px;
-    height: 150px;
-    border: 3px solid black;
+    width: 150px;
+    height: 300px;
+    border: 0.5px solid black;
     align-items: center;
-    margin: 10px;
+    margin: 15px;
+    overflow: hidden;
+  }
+
+  .image-box {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }

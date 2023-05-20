@@ -1,29 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <body>
-  <head>
-    <title>Background Image Example</title>
+<head>
+  <title>Movie Recommendation App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <h1>Movie Recommendation App</h1>
 
-    <h1> Movie Recommendation App </h1>
+  <form id="searchForm" method="POST" action="/">
+    <label for="name">Select a movie:</label>
+    <input type="text" id="name" name="name" oninput="filterMovieOptions()" list="moviesList">
+    <datalist id="moviesList">
+      {% for movie in movies %}
+        <option value="{{ movie }}"></option>
+      {% endfor %}
+    </datalist>
+    <input type="submit" value="Submit">
+  </form>
 
-  </head>
-    <link rel='stylesheet' href="{{ url_for('static', filename='css/style.css') }}">
-  </head>    
+  <script>
+    function filterMovieOptions() {
+      var inputElement = document.getElementById("name");
+      var inputValue = inputElement.value.toLowerCase();
+      var options = document.querySelectorAll("#moviesList option");
 
-    <form id="searchForm" method='POST' action='/'>
-      <input type="text" id="name" name="name" placeholder="Enter your search query" value=""><br>
-      <input type="submit" value="Submit">
-    </form>
- 
-    <body>
-      <div class="container">
-        {% for item in movie_list %}
-        <div class='box'> {{ item  }} </div>
-        {% endfor %}
-      </div>
-    </body>
+      for (var i = 0; i < options.length; i++) {
+        var optionValue = options[i].value.toLowerCase();
+        if (optionValue.includes(inputValue)) {
+          options[i].removeAttribute("hidden");
+        } else {
+          options[i].setAttribute("hidden", "hidden");
+        }
+      }
+    }
+  </script>
 
-
-
-  </body>  
+  <div class="container">
+    <div class="box">
+      <img src="{{ final_list[0][0] }}" class="image-box">
+      <h3 id="mname">{{ final_list[0][1] }}</h3>
+    </div>
+  </div>
+  
+  <div class="container">
+    {% for item in final_list[1:] %}
+    <div class="box">
+      <img src="{{ item[0] }}" class="image-box">
+      <h3 id="mname">{{ item[1] }}</h3>
+    </div>
+    {% endfor %}
+  </div>
+</body>
 </html>
