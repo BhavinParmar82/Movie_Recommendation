@@ -8,16 +8,21 @@ import pandas as pd
 # define the website to scrape and path where the chromediver is located
 website = 'https://www.imdb.com/'
 service = Service('C:/Users/bhavi/Downloads/chromedriver') # write your path here
-      
+        
 def get_moviedetails(movie_list):
     poster_list = []
     info = []
+    plot = []
     
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless=new")
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.get(website)    
+
     for movie in movie_list:
         # define 'driver' variable
-        driver = webdriver.Chrome(service=service)
-        driver.get(website)    
-        search = driver.find_element("id", "suggestion-search")
+        search = driver.find_element(by="id", value="suggestion-search")
+        #search = driver.find_element(by="xpath", value='//*[@id="suggestion-search"]')
         search.clear()
         
         movie = movie.title()
@@ -34,6 +39,7 @@ def get_moviedetails(movie_list):
             
             # To fetch movie plot
             text_element = driver.find_element(by='xpath', value='//p[@data-testid="plot"]')
+            plot.append(text_element.text)
             
             # To fetch Director Name, Writer Name and Star Cast
             credit_element = driver.find_element(by='xpath', value="//ul[@class='ipc-metadata-list ipc-metadata-list--dividers-all title-pc-list ipc-metadata-list--baseAlt']")
@@ -54,20 +60,17 @@ def get_moviedetails(movie_list):
             converted_data = [item for item in converted_data if item.strip()]
                 
             # Split the data on the newline character and create a dictionary
-            data_dict = {}
+            temp = []
             for item in converted_data:
-                key, value = item.split('\n')
-                data_dict[key] = value
-                print(item)
-
-            # Create a DataFrame from the dictionary
-            df = pd.DataFrame.from_dict(data_dict, orient='index', columns=['Data'])
+                info1, name = item.split("\n")
+                temp.append(name)
             
         except NoSuchElementException:
             image_url = "Image Not Found"
             
         poster_list.append(image_url)
-        info = info + [df]     
-        driver.close()
-    return poster_list, info
+        info.append(temp)     
+        #driver.close()
+    driver.quit()
+    return poster_list, info, plot
    

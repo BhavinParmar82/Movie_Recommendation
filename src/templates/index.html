@@ -8,14 +8,14 @@
   <h1>Movie Recommendation App</h1>
 
   <form id="searchForm" method="POST" action="/">
-    <label for="name">Select a movie:</label>
-    <input type="text" id="name" name="name" oninput="filterMovieOptions()" list="moviesList">
+    <input type="text" class="name" name="name" placeholder="Enter Movie Name" oninput="filterMovieOptions()" list="moviesList">
     <datalist id="moviesList">
       {% for movie in movies %}
         <option value="{{ movie }}"></option>
       {% endfor %}
     </datalist>
-    <input type="submit" value="Submit">
+    <button type="submit" class="name">Search</button>
+    <button type="submit" class="name" name="reset" value="true">Reset</button>
   </form>
 
   <script>
@@ -36,19 +36,68 @@
   </script>
 
   <div class="container0">
-    <div class="box">
-      <img src="{{ final_list[0][0] }}" class="image-box"> <h1 id="detail">{{ info[0] }}</h1>
-      <h3 id="mname">{{ final_list[0][1] }}</h3>
-    </div>
+    {% if final_list|length > 0 %}
+      <div class="box">
+        <img src="{{ final_list[0][1] }}" class="image-box">
+      </div>
+
+      <table class="info_table"> 
+        <tr>
+          <td colspan="2" class="movie-header"> {{ final_list[0][0] }} </td>
+        </tr>
+        <tr>
+          <td class="header"> Director </td>
+          <td class="value"> {{ final_list[0][2][0] }} </td>
+        </tr>
+        <tr>
+          <td class="header"> Writer(s) </td>
+          <td class="value"> {{ final_list[0][2][1] }} </td>
+        </tr>
+        <tr>
+          <td class="header"> Star Cast </td>
+          <td class="value"> {{ final_list[0][2][2] }} </td>
+        </tr>
+        <tr>
+         <td class="header"> Plot </td>
+          <td class="value"> {{ final_list[0][3] }} </td>
+        </tr>    
+      </table>
+    {% endif %}
   </div>
-  
+
+
+
+{% if final_list|length > 0 %}
+  <h1> Recommended Movies </h1>
+  {% for item in final_list[1:] %}
   <div class="container">
-    {% for item in final_list[1:] %}
     <div class="box">
-      <img src="{{ item[0] }}" class="image-box"> <h1 id="detail">{{ info[item] }}</h1>
-      <h3 id="mname">{{ item[1] }}</h3>
+      <img src="{{ item[1] }}" class="image-box">
     </div>
-    {% endfor %}
-  </div>
+
+    <table class="info_table">
+      <tr>
+        <td colspan="2"  class="movie-header"> {{ item[0] }} </td>
+      </tr>
+      <tr>
+      <td class="header"> Director </td>
+      <td class="value"> {{ item[2][0] }} </td>
+      </tr>
+      <tr>
+      <td class="header"> Writer(s) </td>
+      <td class="value"> {{ item[2][1] }} </td>
+      </tr>
+      <tr>
+      <td class="header"> Star Cast </td>
+      <td class="value"> {{ item[2][2] }} </td>
+      </tr>
+      <tr>
+      <td class="header"> Plot </td>
+      <td class="value"> {{ item[3] }} </td>
+      </tr>    
+    </table>
+  </div>  
+  {% endfor %}
+{% endif %}
 </body>
 </html>

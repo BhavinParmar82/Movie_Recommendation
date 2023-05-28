@@ -17,7 +17,7 @@ select {
     width: 200px;
   }
 
-#name{
+.name{
     font-size: 20px;
 }
 #mname{
@@ -26,36 +26,71 @@ select {
     color:blue;
 }
 #detail{
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
+  margin-right: 10px;
   font: inherit;
-  vertical-align: baseline;
 }
 
 .container0 {
+  padding-left: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  margin-top: 80px;
+  margin-bottom: 150px;
 }
 
 .container {
+    padding-left: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    overflow: auto;
   }
   
   .box {
-    width: 150px;
-    height: 500px;
-    border: 0.5px solid black;
-    margin: 15px;
+    width: 185px;
+    height: 225px;
+    margin: 10px;
     overflow: hidden;
   }
 
   .image-box {
-    width: 200px;
+    width: 150px;
     margin-right: 20px;
+  }
+
+  .info_table{
+    height: 225px;
+    table-layout:auto;
+    width: 700px;
+  }
+
+  th, td {
+    padding-left:5px;
+    padding-right:5px;
+    border: 1px solid black;
+    border-radius: 8px;
+  }
+
+  .movie-header{
+    text-align: center;
+    color:white;
+    background-color: darkolivegreen;
+    font-size: x-large;
+    font-weight: bold;
+    font-family: Lucida Sans;
+  }
+
+  .header{
+    width: 80px;
+    text-align: center;
+    background-color: darkcyan;
+    font-family: Lucida Sans;
+    font-size: small;
+  }
+
+  .value{
+    background-color:antiquewhite;
+    font-family: Lucida Sans;
+    font-size: small;
   }
