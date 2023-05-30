@@ -1,13 +1,23 @@
-h1{
-    color: blue;
+#main_title{
+    color:blue;
+    font-size: 50px;
+    font-family: Lucida Sans;
     text-align: center;
-    font-size: 60px;
+    justify-content: center;
+}
+
+#subtitle{
+  color:blue;
+  font-size: 40px;
+  font-family: Lucida Sans;  
+  text-align: center;
+  justify-content: center;
 }
 
 body {
     background-color: burlywood;
   }
-  
+
 #searchForm {
     text-align: center;
 }
@@ -35,8 +45,8 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
-  margin-bottom: 150px;
+  margin-top: 50px;
+  margin-bottom: 100px;
 }
 
 .container {
@@ -86,11 +96,11 @@ select {
     text-align: center;
     background-color: darkcyan;
     font-family: Lucida Sans;
-    font-size: small;
+    font-size: medium;
   }
 
   .value{
     background-color:antiquewhite;
     font-family: Lucida Sans;
-    font-size: small;
+    font-size: medium;
   }

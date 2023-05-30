@@ -4,10 +4,11 @@
   <title>Movie Recommendation App</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-  <h1>Movie Recommendation App</h1>
 
-  <form id="searchForm" method="POST" action="/">
+<body>
+  <h1 id="main_title">MovieMatch App</h1>
+
+  <form id="searchForm" method="POST" action="/" onsubmit="showLoading()">
     <input type="text" class="name" name="name" placeholder="Enter Movie Name" oninput="filterMovieOptions()" list="moviesList">
     <datalist id="moviesList">
       {% for movie in movies %}
@@ -34,6 +35,7 @@
       }
     }
   </script>
+
 
   <div class="container0">
     {% if final_list|length > 0 %}
@@ -66,9 +68,8 @@
   </div>
 
 
-
 {% if final_list|length > 0 %}
-  <h1> Recommended Movies </h1>
+  <h1 id="subtitle"> Recommended Movies </h1>
   {% for item in final_list[1:] %}
   <div class="container">
     <div class="box">

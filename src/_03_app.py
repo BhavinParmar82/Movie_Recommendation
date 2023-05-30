@@ -5,24 +5,6 @@ from _02b_code import get_moviedetails
 
 app = Flask(__name__)
 
-'''
-@app.route('/', methods = ['POST'])
-def submit():
-    movies = unique_movie_list()
-    movie_list = []
-    poster_list = []
-    final_list = []
-    info = [[]]
-    plot = []
-    if request.method == 'POST':
-        name = request.form['name']
-        movie_list = recommend(name)
-        movie_list = [name] + movie_list
-        poster_list, info, plot = get_moviedetails(movie_list)
-        final_list = list(zip(movie_list, poster_list, info, plot))
-    return render_template('index.html', final_list = final_list, movies=movies)
-'''
-
 movies=unique_movie_list()
 final_list = []
 
