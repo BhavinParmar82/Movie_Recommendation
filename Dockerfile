@@ -4,4 +4,4 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 5000
-CMD python src/_03_app.py
+CMD python ./src/_03_app.py
