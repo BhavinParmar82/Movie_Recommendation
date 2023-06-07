@@ -1,22 +1,26 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver import Chrome
 import time
 import re
 import pandas as pd
 
 # define the website to scrape and path where the chromediver is located
 website = 'https://www.imdb.com/'
-service = Service('C:/Users/bhavi/Downloads/chromedriver') # write your path here
         
 def get_moviedetails(movie_list):
     poster_list = []
     info = []
     plot = []
     
-    options = webdriver.ChromeOptions()
+    options = Options()
     options.add_argument("--headless=new")
-    driver = webdriver.Chrome(service=service, options=options)
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+     
+    driver = webdriver.Chrome(options=options)
     driver.get(website)    
 
     for movie in movie_list:
