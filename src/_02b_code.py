@@ -1,8 +1,11 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver import Chrome
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 import time
 import re
 import pandas as pd
@@ -19,14 +22,15 @@ def get_moviedetails(movie_list):
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-     
+ 
     driver = webdriver.Chrome(options=options)
+    driver.set_window_size(1920, 1080)
     driver.get(website)    
+
 
     for movie in movie_list:
         # define 'driver' variable
         search = driver.find_element(by="id", value="suggestion-search")
-        #search = driver.find_element(by="xpath", value='//*[@id="suggestion-search"]')
         search.clear()
         
         movie = movie.title()
@@ -46,11 +50,14 @@ def get_moviedetails(movie_list):
             plot.append(text_element.text)
             
             # To fetch Director Name, Writer Name and Star Cast
-            credit_element = driver.find_element(by='xpath', value="//ul[@class='ipc-metadata-list ipc-metadata-list--dividers-all title-pc-list ipc-metadata-list--baseAlt']")
+            #credit_element = driver.find_element(by='xpath', value="//ul[@class='ipc-metadata-list ipc-metadata-list--dividers-all title-pc-list ipc-metadata-list--baseAlt']")
+            
+            credit_element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//ul[@class='ipc-metadata-list ipc-metadata-list--dividers-all title-pc-list ipc-metadata-list--baseAlt']")))
+            
             credit_element1 = credit_element.find_elements(by='xpath', value='//li[@data-testid="title-pc-principal-credit"]')
-
+            
             data = []
-            for li in credit_element1:
+            for li in credit_element1[0:3]:
                 data.append(li.text)
                                 
             converted_data = []
@@ -76,5 +83,8 @@ def get_moviedetails(movie_list):
         info.append(temp)     
         #driver.close()
     driver.quit()
+    print(poster_list)
+    print(info)
+    print(plot)
     return poster_list, info, plot
    

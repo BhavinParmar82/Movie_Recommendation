@@ -33,12 +33,6 @@ RUN apt-get install -y \
     libgbm-dev \
     fonts-liberation
 
-# Copy Chrome driver from the "drivers" folder of your project
-COPY drivers/chromedriver /usr/local/bin/
-
-# Set Chrome driver path
-ENV PATH "/usr/local/bin:$PATH"
-
 # Copy your web scraping code to the Docker image
 COPY . /app/
 

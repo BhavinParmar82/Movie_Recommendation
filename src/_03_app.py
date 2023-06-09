@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 from _02_code import recommend, unique_movie_list
-#from _02a_code import get_poster
 from _02b_code import get_moviedetails
 
 app = Flask(__name__)
