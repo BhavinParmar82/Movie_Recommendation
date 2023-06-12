@@ -5,100 +5,108 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
+
 <body>
   <h1 id="main_title">MovieMatch App</h1>
 
-  <form id="searchForm" method="POST" action="/" onsubmit="showLoading()">
-    <input type="text" class="name" name="name" placeholder="Enter Movie Name" oninput="filterMovieOptions()" list="moviesList">
-    <datalist id="moviesList">
-      {% for movie in movies %}
-        <option value="{{ movie }}"></option>
-      {% endfor %}
-    </datalist>
-    <button type="submit" class="name">Search</button>
-    <button type="submit" class="name" name="reset" value="true">Reset</button>
-  </form>
+  <body>
+    {% if instance_in_use %}
+    <h1 id="message"> Instance is already in use. Please try again later. </h1>
+    {% endif %}
+  
 
-  <script>
-    function filterMovieOptions() {
-      var inputElement = document.getElementById("name");
-      var inputValue = inputElement.value.toLowerCase();
-      var options = document.querySelectorAll("#moviesList option");
+    <form id="searchForm" method="POST" action="/" onsubmit="showLoading()">
+      <input type="text" class="name" name="name" placeholder="Enter Movie Name" oninput="filterMovieOptions()" list="moviesList">
+      <datalist id="moviesList">
+        {% for movie in movies %}
+          <option value="{{ movie }}"></option>
+        {% endfor %}
+      </datalist>
+      <button type="submit" class="name">Search</button>
+      <button type="submit" class="name" name="reset" value="true">Reset</button>
+    </form>
 
-      for (var i = 0; i < options.length; i++) {
-        var optionValue = options[i].value.toLowerCase();
-        if (optionValue.includes(inputValue)) {
-          options[i].removeAttribute("hidden");
-        } else {
-          options[i].setAttribute("hidden", "hidden");
+    <script>
+      function filterMovieOptions() {
+        var inputElement = document.getElementById("name");
+        var inputValue = inputElement.value.toLowerCase();
+        var options = document.querySelectorAll("#moviesList option");
+
+        for (var i = 0; i < options.length; i++) {
+          var optionValue = options[i].value.toLowerCase();
+          if (optionValue.includes(inputValue)) {
+            options[i].removeAttribute("hidden");
+          } else {
+            options[i].setAttribute("hidden", "hidden");
+          }
         }
       }
-    }
-  </script>
+    </script>
 
 
-  <div class="container0">
-    {% if final_list|length > 0 %}
-      <div class="box">
-        <img src="{{ final_list[0][1] }}" class="image-box">
-      </div>
+    <div class="container0">
+      {% if final_list|length > 0 %}
+        <div class="box">
+          <img src="{{ final_list[0][1] }}" class="image-box">
+        </div>
 
-      <table class="info_table"> 
-        <tr>
-          <td colspan="2" class="movie-header"> {{ final_list[0][0] }} </td>
-        </tr>
-        <tr>
-          <td class="header"> Director </td>
-          <td class="value"> {{ final_list[0][2][0] }} </td>
-        </tr>
-        <tr>
-          <td class="header"> Writer(s) </td>
-          <td class="value"> {{ final_list[0][2][1] }} </td>
-        </tr>
-        <tr>
-          <td class="header"> Star Cast </td>
-          <td class="value"> {{ final_list[0][2][2] }} </td>
-        </tr>
-        <tr>
-         <td class="header"> Plot </td>
-          <td class="value"> {{ final_list[0][3] }} </td>
-        </tr>    
-      </table>
-    {% endif %}
-  </div>
-
-
-{% if final_list|length > 0 %}
-  <h1 id="subtitle"> Recommended Movies </h1>
-  {% for item in final_list[1:] %}
-  <div class="container">
-    <div class="box">
-      <img src="{{ item[1] }}" class="image-box">
+        <table class="info_table"> 
+          <tr>
+            <td colspan="2" class="movie-header"> {{ final_list[0][0] }} </td>
+          </tr>
+          <tr>
+            <td class="header"> Director </td>
+            <td class="value"> {{ final_list[0][2][0] }} </td>
+          </tr>
+          <tr>
+            <td class="header"> Writer(s) </td>
+            <td class="value"> {{ final_list[0][2][1] }} </td>
+          </tr>
+          <tr>
+            <td class="header"> Star Cast </td>
+            <td class="value"> {{ final_list[0][2][2] }} </td>
+          </tr>
+          <tr>
+          <td class="header"> Plot </td>
+            <td class="value"> {{ final_list[0][3] }} </td>
+          </tr>    
+        </table>
+      {% endif %}
     </div>
 
-    <table class="info_table">
-      <tr>
-        <td colspan="2"  class="movie-header"> {{ item[0] }} </td>
-      </tr>
-      <tr>
-      <td class="header"> Director </td>
-      <td class="value"> {{ item[2][0] }} </td>
-      </tr>
-      <tr>
-      <td class="header"> Writer(s) </td>
-      <td class="value"> {{ item[2][1] }} </td>
-      </tr>
-      <tr>
-      <td class="header"> Star Cast </td>
-      <td class="value"> {{ item[2][2] }} </td>
-      </tr>
-      <tr>
-      <td class="header"> Plot </td>
-      <td class="value"> {{ item[3] }} </td>
-      </tr>    
-    </table>
-  </div>  
-  {% endfor %}
-{% endif %}
+
+    {% if final_list|length > 0 %}
+      <h1 id="subtitle"> Recommended Movies </h1>
+      {% for item in final_list[1:] %}
+      <div class="container">
+        <div class="box">
+          <img src="{{ item[1] }}" class="image-box">
+        </div>
+
+        <table class="info_table">
+          <tr>
+            <td colspan="2"  class="movie-header"> {{ item[0] }} </td>
+          </tr>
+          <tr>
+          <td class="header"> Director </td>
+          <td class="value"> {{ item[2][0] }} </td>
+          </tr>
+          <tr>
+          <td class="header"> Writer(s) </td>
+          <td class="value"> {{ item[2][1] }} </td>
+          </tr>
+          <tr>
+          <td class="header"> Star Cast </td>
+          <td class="value"> {{ item[2][2] }} </td>
+          </tr>
+          <tr>
+          <td class="header"> Plot </td>
+          <td class="value"> {{ item[3] }} </td>
+          </tr>    
+        </table>
+      </div>  
+      {% endfor %}
+    {% endif %}
+  </body>
 </body>
-</html>
+  </html>

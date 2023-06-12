@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt 
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
+from sklearn.metrics.pairwise import cosine_similarity
 from _01_preprocessing import json_to_string
 
 data = pd.read_csv('./data/tmdb_5000_movies.csv')
